@@ -1,0 +1,4 @@
+- if @item.is_a?(Comment)
+  = render CommentComponent.new(comment: @item)
+- else
+  = render StatusChangeComponent.new(status_change: @item)

@@ -1,0 +1,21 @@
+.px-4.py-6.bg-gray-50
+  .flex.space-x-3
+    .flex-shrink-0
+      img.h-10.w-10.rounded-full[src="https://ui-avatars.com/api/?name=#{@status_change.user.email}&background=random" alt=""]
+    .flex-grow
+      .flex.items-center.justify-between
+        .text-sm
+          span.font-medium.text-gray-900
+            = @status_change.user.email
+          span.text-gray-500
+            |  changed status from
+          span class="#{status_color_class(@status_change.from_status)} px-2 py-0.5 rounded-full text-xs font-medium"
+            = @status_change.from_status.humanize
+          span.text-gray-500
+            |  to
+          span class="#{status_color_class(@status_change.to_status)} px-2 py-0.5 rounded-full text-xs font-medium"
+            = @status_change.to_status.humanize
+          span.text-gray-500
+            |  ·
+            = time_ago_in_words(@status_change.created_at)
+            |  ago

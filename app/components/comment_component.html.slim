@@ -1,0 +1,25 @@
+.px-4.py-6
+  .flex.space-x-3
+    .flex-shrink-0
+      img.h-10.w-10.rounded-full[src="https://ui-avatars.com/api/?name=#{@comment.user.email}&background=random" alt=""]
+    .flex-grow
+      .flex.items-center.justify-between
+        .text-sm
+          span.font-medium.text-gray-900
+            = @comment.user.email
+          span.text-gray-500
+            |  ·
+            = time_ago_in_words(@comment.created_at)
+            |  ago
+
+      .prose.prose-sm.mt-2.max-w-none.text-gray-500
+        = @comment.content
+
+      - if @comment.attachments.any?
+        .mt-4.flex.flex-wrap.gap-4
+          - @comment.attachments.each do |attachment|
+            = link_to rails_blob_path(attachment, disposition: "attachment"),
+              class: "group relative flex items-center space-x-2.5 rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700" do
+              svg.h-5.w-5.flex-shrink-0.text-gray-400.group-hover:text-gray-500[fill="none" stroke="currentColor" viewbox="0 0 24 24"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"]
+              span = attachment.filename
