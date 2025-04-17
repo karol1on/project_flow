@@ -1,0 +1,6 @@
+.mb-4
+  = form_with url: project_comments_path(project), model: comment_form, data: { controller: "form" } do |f|
+    .flex.flex-col.gap-6
+      = f.rich_text_area :content, placeholder: "Write a comment..."
+      .w-max-fit
+        = f.submit "Post", class: "btn btn-primary"

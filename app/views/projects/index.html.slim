@@ -1,0 +1,22 @@
+.px-6.py-2
+  .flex.justify-between
+    .flex.flex-col
+      h1.page-title Projects
+      p.page-description A list of all projects and their current status.
+    .flex
+      = link_to "Add project", new_project_path, class: "btn btn-primary"
+
+.mt-4.px-6.py-2
+  table.projects-table
+    thead
+      tr
+        th scope="col" Name
+        th scope="col" Status
+    tbody
+      - @projects.each do |project|
+        tr
+          td
+            = link_to project.name, project_path(project), class: "text-blue-600 hover:text-blue-900"
+          td
+            span.badge class="#{status_color_class(project.status)}"
+              = project.status.humanize

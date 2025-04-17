@@ -1,0 +1,10 @@
+.mb-4
+  = form_with url: project_status_changes_path(project), model: status_change_form do |f|
+    .flex.justify-between
+      .max-w-fit
+        = f.select :to_status,
+          Project.statuses.except(project.status).keys.map { |s| [s.humanize, s] },
+          { prompt: "Change status..." },
+          class: "form-field"
+      = f.submit "Update status",
+        class: "btn btn-primary"

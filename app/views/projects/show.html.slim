@@ -1,0 +1,21 @@
+.header-section
+  = turbo_stream_from "project_#{@project.id}"
+  = turbo_stream_from "project_#{@project.id}_conversation"
+
+.main-content
+  .flex.justify-between.mb-10
+    h1.page-title
+      = @project.name
+    #project_status_badge
+      = render "projects/status_badge", project: @project
+  .content-card
+    .card-body
+      - if current_user.project_manager?(@project)
+        = turbo_frame_tag "status_change_form" do
+          = render "status_change_form", project: @project, status_change_form: @status_change_form
+
+      = turbo_frame_tag "comment_form" do
+        = render "comment_form", project: @project, comment_form: @comment_form
+
+    #conversation_items.conversation-list
+      = render ConversationItemComponent.with_collection(@project.conversation_items.chronological)
