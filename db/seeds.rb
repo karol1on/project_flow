@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 # Clear existing data
-Rails.logger.debug "Clearing existing data..."
+puts "Clearing existing data..."
 ProjectMembership.destroy_all
 Project.destroy_all
 User.destroy_all
 
 # Create admin user
-Rails.logger.debug "Creating admin user..."
+puts "Creating admin user..."
 User.create!(
   email: "admin@example.com",
   password: "password",
@@ -16,7 +16,7 @@ User.create!(
 )
 
 # Create regular users
-Rails.logger.debug "Creating regular users..."
+puts "Creating regular users..."
 users = Array.new(5) do |i|
   User.create!(
     email: "user#{i + 1}@example.com",
@@ -27,7 +27,7 @@ users = Array.new(5) do |i|
 end
 
 # Create projects with different statuses
-Rails.logger.debug "Creating projects..."
+puts "Creating projects..."
 projects = [
   { name: "Website Redesign", status: "in_progress" },
   { name: "Mobile App Development", status: "not_started" },
@@ -39,7 +39,7 @@ projects = [
 end
 
 # Add members to projects
-Rails.logger.debug "Adding members to projects..."
+puts "Adding members to projects..."
 
 users.each_with_index do |user, index|
   # Assign each user as a manager to one project
@@ -69,7 +69,7 @@ projects.each do |project|
 end
 
 # Add some comments and status changes to projects
-Rails.logger.debug "Adding comments and status changes..."
+puts "Adding comments and status changes..."
 projects.each do |project|
   project_members = project.members
 
@@ -95,6 +95,6 @@ projects.each do |project|
   )
 end
 
-Rails.logger.debug "Seeding completed!"
-Rails.logger.debug "Admin user: admin@example.com / password"
-Rails.logger.debug "Regular users: user1@example.com through user5@example.com / password"
+puts "Seeding completed!"
+puts "Admin user: admin@example.com / password"
+puts "Regular users: user1@example.com through user5@example.com / password"
