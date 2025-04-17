@@ -1,0 +1,39 @@
+doctype html
+html.h-full.bg-gray-50
+  head
+    title Project Flow
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "tailwind", "data-turbo-track": "reload"
+    = stylesheet_link_tag :app, "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  body
+    nav.bg-white.shadow
+      .px-4
+        .flex.h-16.justify-between
+          .flex.items-center.gap-4
+            .flex
+              = link_to root_path, class: "nav-logo" do
+                | Project Flow
+            .flex
+              = link_to "Projects", projects_path, class: "nav-item #{current_page?(projects_path) ? 'nav-item-active' : 'nav-item-inactive'}"
+
+          .flex.items-center.gap-4
+            - if user_signed_in?
+              .flex
+                = button_to destroy_user_session_path, method: :delete, class: "nav-item" do
+                  | Sign out
+            - else
+              = link_to "Sign in", new_user_session_path, class: "nav-item"
+              = link_to "Sign up", new_user_registration_path, class: "nav-item nav-item-primary"
+
+    - if notice
+      = render "shared/notification", color: "green", message: notice
+
+    - if alert
+      = render "shared/notification", color: "red", message: alert
+
+    main.p-4
+      = yield
