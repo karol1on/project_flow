@@ -1,0 +1,22 @@
+.devise-box
+  h2.devise-header Sign in to your account
+
+  .devise-container
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .flex.flex-col.gap-6
+        .flex.flex-col
+          = f.label :email, class: "form-label"
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-field"
+
+        .flex.flex-col
+          = f.label :password, class: "form-label"
+          = f.password_field :password, autocomplete: "current-password", class: "form-field"
+
+        - if devise_mapping.rememberable?
+          .flex.items-center
+            = f.check_box :remember_me, class: "form-check-box"
+            = f.label :remember_me, class: "check-box-label"
+
+        = f.submit "Sign in", class: "btn btn-primary"
+
+    = render "devise/shared/links"
