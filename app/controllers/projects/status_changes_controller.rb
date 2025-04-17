@@ -39,13 +39,4 @@ module Projects
       params.expect(status_change_form: [:to_status])
     end
   end
-
-  # class User < ApplicationRecord
-  #   has_many :conversation_items
-  #   has_many :comments
-  #   has_many :status_changes
-
-  #   validates :email, presence: true, uniqueness: true
-  #   validates :name, presence: true
-  # end
 end
